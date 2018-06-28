@@ -134,7 +134,7 @@ public class MainActivity extends AppCompatActivity {
         webView.getSettings().setJavaScriptEnabled(false);//设置使用够执行JS脚本
         webView.reload();
         webView.getSettings().setJavaScriptEnabled(true);//设置使用够执行JS脚本
-        Toast.makeText(this, "已刷新网页", Toast.LENGTH_LONG).show();
+        Toast.makeText(this, "正在刷新网页", Toast.LENGTH_LONG).show();
     }
 
 
@@ -396,7 +396,7 @@ public class MainActivity extends AppCompatActivity {
             HTML=html;
         }
         @JavascriptInterface
-        public void getCID(String tbody) {
+       /* public void getCID(String tbody) {
             String regEx = "<tr[\\S\\s]*?>";
             Pattern p = Pattern.compile(regEx);
             Matcher m = p.matcher(tbody);
@@ -409,6 +409,21 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(MainActivity.this, "已复制确认ID" , Toast.LENGTH_SHORT).show();
             }
             else{Toast.makeText(MainActivity.this, "未检测到确认ID" , Toast.LENGTH_SHORT).show();}
+        }*/
+        public void getCID(String tbody) {
+            Matcher b1 = Pattern.compile("\\d{6}").matcher(tbody);
+            if(b1.find()){
+                CID=b1.group();
+            }
+            while(b1.find()) {
+                CID=CID+"-"+b1.group();
+            }
+            if(CID.length()==55){
+                putTextIntoClip("确认ID："+CID);
+                Toast.makeText(MainActivity.this, "已复制确认ID" , Toast.LENGTH_SHORT).show();
+            }
+            else{Toast.makeText(MainActivity.this, "未检测到确认ID" , Toast.LENGTH_SHORT).show();}
+            Log.e(CID, "getCID: ");
         }
     }
 
