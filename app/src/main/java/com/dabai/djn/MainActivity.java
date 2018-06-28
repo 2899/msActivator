@@ -423,7 +423,7 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(MainActivity.this, "已复制确认ID" , Toast.LENGTH_SHORT).show();
             }
             else{Toast.makeText(MainActivity.this, "未检测到确认ID" , Toast.LENGTH_SHORT).show();}
-            Log.e(CID, "getCID: ");
+            //Log.e( "getCID: ",CID);
         }
     }
 
